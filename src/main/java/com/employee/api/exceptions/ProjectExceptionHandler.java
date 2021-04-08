@@ -1,6 +1,7 @@
 package com.employee.api.exceptions;
 
 import java.util.Date;
+import java.util.concurrent.CompletionException;
 import java.util.logging.ErrorManager;
 
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,14 @@ public class ProjectExceptionHandler  {
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(value=NullPointerException.class)
 	public ResponseEntity<?>  nullPointerExceptionHandler(Exception ex)
+	{
+		ErrorDetails errorDetails = new ErrorDetails(new Date(),ex.getMessage(),"Contact support !!!");
+		return new ResponseEntity(errorDetails,HttpStatus.NOT_FOUND);
+		
+	}
+	
+	@ExceptionHandler(value=RuntimeException.class)
+	public ResponseEntity<?> completionException(Exception ex)
 	{
 		ErrorDetails errorDetails = new ErrorDetails(new Date(),ex.getMessage(),"Contact support !!!");
 		return new ResponseEntity(errorDetails,HttpStatus.NOT_FOUND);

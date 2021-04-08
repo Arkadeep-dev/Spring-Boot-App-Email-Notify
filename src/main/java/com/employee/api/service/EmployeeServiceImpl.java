@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public boolean resignEmployee(String id) {
+	public void resignEmployee(String id){
 		// TODO Auto-generated method stub
 
 		Optional<Employee> e = dao.getEmployeeById(id);
@@ -64,11 +66,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		dao.resignEmployee(id, t);
 		boolean email= emailService.resignEmployee(employee);
 
-		if(email)
-			return true;
-		else
-			return false;
-		
+		if(!email)
+			throw new RuntimeException("mail not sent !!!");
 	}
 
 }
