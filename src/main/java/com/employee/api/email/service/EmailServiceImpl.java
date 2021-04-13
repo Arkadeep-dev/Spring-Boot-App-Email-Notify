@@ -2,8 +2,6 @@ package com.employee.api.email.service;
 
 import java.util.Properties;
 
-import javax.crypto.Cipher;
-import javax.crypto.SecretKeyFactory;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -12,81 +10,92 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.employee.api.decrypt.DecryptPassword;
 import com.employee.api.email.entity.Email;
 import com.employee.api.entity.Employee;
+import com.employee.api.exceptions.ProjectException;
 
 @Service
-public class EmailServiceImpl implements EmailService {
+public class EmailServiceImpl implements EmailServiceable {
 
-	@Value("${email.groupAddress}")
+	// getting group email address from properties file
+	@Value("${email.group}")
 	private String groupEmailAddress;
 
+	// getting employee email address from properties file
 	@Value("${email.from.address}")
 	private String fromEmailAddress;
 
+	// getting employee password from properties file
 	@Value("${email.from.password}")
 	private String fromEmailPassword;
 
+	// getting mail host from properties file
+	@Value("${email.host}")
+	private String host;
+
+	// getting mail port from properties file
+	@Value("${email.port}")
+	private Integer port;
+
+	// getting mail ssl.enable value from properties file
+	@Value("${email.smtp.auth}")
+	private boolean sslEnable;
+
+	// getting mail ssl.auth value from properties file
+	@Value("${email.smtp.ssl.enable}")
+	private boolean sslAuth;
+
 	@Override
-	public boolean resignEmployee(Employee e) {
-		// TODO Auto-generated method stub
-		System.out.println();
+	public void resignEmployee(Employee employee) {
+		
 		Email email = new Email();
 		email.setTo(groupEmailAddress);
 		email.setFrom(fromEmailAddress);
 		email.setFromPassword(fromEmailPassword);
 		email.setSubject("Resignation letter");
-		email.setMessage("Employee is resigning with eID \t=" + e.getEmpId() + " \t eName \t" + e.getEmpName()
-				+ "\t eProject \t" + e.getEmpProject() + "\t on \t" + e.getEmpDOR());
-
-		return EmailServiceImpl.sendEmail(email);
+		email.setMessage(
+				"Employee is resigning with eID \t=" + employee.getEmpId() + " \t eName \t" + employee.getEmpName()
+						+ "\t eProject \t" + employee.getEmpProject() + "\t on \t" + employee.getEmpDOR());
+		
+		// get system properties
+		Properties properties = System.getProperties();
+		// setting info in properties
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", port);
+		properties.put("mail.smtp.ssl.enable", sslEnable);
+		properties.put("mail.smtp.auth", sslAuth);
+		
+		new EmailServiceImpl().sendEmail(email, properties);
 	}
 
-	private static boolean sendEmail(Email e) {
+	public void sendEmail(Email email, Properties properties) {
 
-		boolean flag = false;
-
-		String host = "smtp.gmail.com";
-
-		Properties properties = System.getProperties();
-
-		properties.put("mail.smtp.host", host);
-		properties.put("mail.smtp.port", "465");
-		properties.put("mail.smtp.ssl.enable", "true");
-		properties.put("mail.smtp.auth", "true");
-
+		// getting the session object and setting the properties and authenticating
 		Session session = Session.getInstance(properties, new Authenticator() {
 
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				// TODO Auto-generated method stub
-				return new PasswordAuthentication(e.getFrom(), DecryptPassword.decrypt(e.getFromPassword()));
+				return new PasswordAuthentication(email.getFrom(), DecryptPassword.decrypt(email.getFromPassword()));
 			}
 
 		});
 
 		session.setDebug(true);
+		// creating the mail
 		MimeMessage mimeMessage = new MimeMessage(session);
 		try {
-			mimeMessage.setFrom(e.getFrom());
-			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(e.getTo()));
-			mimeMessage.setSubject(e.getSubject());
-			mimeMessage.setText(e.getMessage());
+			mimeMessage.setFrom(email.getFrom());
+			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email.getTo()));
+			mimeMessage.setSubject(email.getSubject());
+			mimeMessage.setText(email.getMessage());
 			Transport.send(mimeMessage);
-
-			flag = true;
 		} catch (Exception ex) {
-			// TODO: handle exception
-			throw new RuntimeException(ex);
+			throw new ProjectException(ex.getMessage());
 		}
-		System.out.println(flag);
-		return flag;
 
 	}
 }

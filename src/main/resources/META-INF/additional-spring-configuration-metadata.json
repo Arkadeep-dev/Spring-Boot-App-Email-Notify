@@ -1,0 +1,132 @@
+{"properties": [
+  {
+    "name": "email.from.password",
+    "type": "java.lang.String",
+    "description": "A description for 'email.from.password'"
+  },
+  {
+    "name": "email.from.address",
+    "type": "java.lang.String",
+    "description": "A description for 'email.from.address'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "mail.properties.smtp.ssl.enable",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.properties.smtp.ssl.enable'"
+  },
+  {
+    "name": "mail.port",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.port'"
+  },
+  {
+    "name": "mail.host",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.host'"
+  },
+  {
+    "name": "mail.properties.smtp.auth",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.properties.smtp.auth'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.groupAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'email.groupAddress'"
+  },
+  {
+    "name": "email.group",
+    "type": "java.lang.String",
+    "description": "A description for 'email.group'"
+  },
+  {
+    "name": "email.mail.host",
+    "type": "java.lang.String",
+    "description": "A description for 'email.mail.host'"
+  },
+  {
+    "name": "email.mail.port",
+    "type": "java.lang.String",
+    "description": "A description for 'email.mail.port'"
+  },
+  {
+    "name": "email.mail.properties.smtp.auth",
+    "type": "java.lang.String",
+    "description": "A description for 'email.mail.properties.smtp.auth'"
+  },
+  {
+    "name": "email.mail.properties.smtp.ssl.enable",
+    "type": "java.lang.String",
+    "description": "A description for 'email.mail.properties.smtp.ssl.enable'"
+  },
+  {
+    "name": "email.host",
+    "type": "java.lang.String",
+    "description": "A description for 'email.host'"
+  },
+  {
+    "name": "email.port",
+    "type": "java.lang.String",
+    "description": "A description for 'email.port'"
+  },
+  {
+    "name": "email.smtp.auth",
+    "type": "java.lang.String",
+    "description": "A description for 'email.smtp.auth'"
+  },
+  {
+    "name": "email.smtp.ssl.enable",
+    "type": "java.lang.String",
+    "description": "A description for 'email.smtp.ssl.enable'"
+  }
+]}

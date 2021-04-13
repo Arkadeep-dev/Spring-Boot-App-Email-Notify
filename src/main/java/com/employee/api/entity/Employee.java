@@ -1,7 +1,6 @@
 package com.employee.api.entity;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,6 @@ public class Employee {
 	private Timestamp empDOR;
 	
 	public Employee() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Employee(String empId, String empName, double empSalary, String empProject, Timestamp empDOJ,

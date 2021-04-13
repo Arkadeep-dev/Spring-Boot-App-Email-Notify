@@ -2,8 +2,6 @@ package com.employee.api.email.entity;
 
 import org.springframework.stereotype.Component;
 
-import com.employee.api.entity.Employee;
-
 @Component
 public class Email {
 
@@ -14,7 +12,6 @@ public class Email {
 	private String message;
 
 	public Email() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Email(String to, String from, String fromPassword, String subject, String message) {
